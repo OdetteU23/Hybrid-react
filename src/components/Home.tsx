@@ -1,5 +1,6 @@
 import type { MediaItem } from 'hybrid-types/DBTypes';
 import MediaRow from './MediaRow';
+//Component to show home page with list of media items
 const Home = () => {
   const mediaArray: MediaItem[] = [
   {

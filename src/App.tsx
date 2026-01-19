@@ -15,9 +15,9 @@ const App = () => {
         filesize: 0,
         media_type: '',
         title: '',
-        description: null,
+        description: '',
         created_at: '',
-        screenshots: null
+        screenshots: []
       }}/>
     </>
   );
