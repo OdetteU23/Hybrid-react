@@ -1,11 +1,13 @@
 import './App.css'
+import Home from './components/Home.tsx';
+import Greetings from './components/Greetings.tsx';
+
 
 const App = () => {
-
   return (
     <>
-      <h1>The Frontend, React</h1>
-      <p>This is the React frontend application.</p>
+      <Greetings/>
+      <Home/>
     </>
   );
 };
