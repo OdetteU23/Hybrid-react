@@ -1,4 +1,6 @@
 //import { useState } from 'react';
+import {type NavigateFunction, useNavigate} from 'react-router';
+//import { useLocation } from 'react-router-dom';
 
 /*import * as React from "react";
 import * as ReactDOM from "react-dom/client";
@@ -21,8 +23,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 */
 
 const Profile = () => {
+  const navigate: NavigateFunction = useNavigate();
   return (
-    <div>Profile View</div>
+    <div>
+      <h1> Welcome to the Profile View!</h1>
+      <button onClick={() => navigate(-1)}>Go back</button>
+      </div>
   );
 }
 
