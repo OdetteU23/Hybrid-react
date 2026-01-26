@@ -1,13 +1,13 @@
 import type { MediaItem } from "hybrid-types/DBTypes";
-import { useState } from "react";
+//import { useState } from "react";
 
-const MediaRow = (props: { item: MediaItem }) => {
-  const { item } = props;
+const MediaRow = (props: { item: MediaItem, setSelectedItem: (item: MediaItem | undefined) => void }) => {
+  const { item, setSelectedItem } = props;
   //const [dummyLikes, setDummyLikes] = useState( 0);
 
-  const dummyLikesState = useState( 0);
-  const dummyLikes = dummyLikesState[0];
-  const setDummyLikes = dummyLikesState[1];
+  //const dummyLikesState = useState( 0);
+  //const dummyLikes = dummyLikesState[0];
+  //const setDummyLikes = dummyLikesState[1];
 
 
   return (
@@ -20,13 +20,19 @@ const MediaRow = (props: { item: MediaItem }) => {
       <td>{new Date(item.created_at).toLocaleString('fi-FI')}</td>
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
+      <td>
+        <button onClick={() =>{
+          setSelectedItem(item);
+        }}> Select to display the image/video
+        </button>
+      </td>
 
-      <td>Likes {dummyLikes}
+      {/* <td>Likes {dummyLikes}
         <button onClick={() =>{
           console.log('Add like to ', item.title);
           setDummyLikes (dummyLikes + 1);
         }}> Add like </button>
-      </td>
+      </td> */}
 
     </tr>
 

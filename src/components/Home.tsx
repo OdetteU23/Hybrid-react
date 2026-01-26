@@ -1,16 +1,18 @@
 import type { MediaItem } from 'hybrid-types/DBTypes';
 import MediaRow from './MediaRow';
+import SingleView from './singleView';
+import { useState } from 'react';
 //Component to show home page with list of media items
 const Home = () => {
   const mediaArray: MediaItem[] = [
   {
     media_id: 8,
     user_id: 5,
-    filename: 'https://place-hold.it/1200x800.jpg&text=Pic1&fontsize=120',
-    thumbnail: 'http://place-hold.it/320/240.jpg&text=Thumb2&fontsize=20',
+    filename: 'https://placehold.co/1200x800?text=Pic1&fontsize=60',
+    thumbnail: 'https://placehold.co/320x240?text=Thumb1&fontsize=20',
     filesize: 170469,
     media_type: 'image/jpeg',
-    title: 'Picture 1',
+    title: '',
     description: 'This is a placeholder picture.',
     created_at: '2024-01-07T20:49:34.000Z',
     screenshots: [],
@@ -18,11 +20,11 @@ const Home = () => {
   {
     media_id: 9,
     user_id: 7,
-    filename: 'https://place-hold.it/800x600.jpg&text=Pic2&fontsize=72',
-    thumbnail: 'http://place-hold.it/320/240.jpg&text=Thumb3&fontsize=20',
+    filename: 'https://placehold.co/800x600?text=Pic2&fontsize=60',
+    thumbnail: 'https://placehold.co/320x240?text=Thumb2&fontsize=20',
     filesize: 1002912,
     media_type: 'image/jpeg',
-    title: 'Pic 2',
+    title: '',
     description: '',
     created_at: '2024-01-07T21:32:27.000Z',
     screenshots: [],
@@ -32,7 +34,7 @@ const Home = () => {
     user_id: 2,
     filename:
       'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4',
-    thumbnail: 'http://place-hold.it/320/240.jpg&text=Thumb1&fontsize=20',
+    thumbnail: 'https://placehold.co/320x240?text=Thumb3&fontsize=20',
     filesize: 1236616,
     media_type: 'video/mp4',
     title: 'Bunny',
@@ -45,11 +47,16 @@ const Home = () => {
 
 
 
-
+const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   return (
     <>
+    {selectedItem && <SingleView item={selectedItem} setSelectedItem={(item) => setSelectedItem(item ?? null)} />}
       <h1>My Media sharing app</h1>
       <h2>My Media</h2>
+    {/* Debug selected item display
+      <p> Selected Item: {selectedItem?.title}</p>
+    */}
+
       <table>
         <thead>
           <tr>
@@ -63,7 +70,7 @@ const Home = () => {
         </thead>
         <tbody>
           {mediaArray.map((item) => (
-            <MediaRow key={item.media_id} item={item} />
+            <MediaRow key={item.media_id} item={item} setSelectedItem={(item) => setSelectedItem(item ?? null)} />
           ))}
         </tbody>
       </table>
