@@ -1,8 +1,9 @@
 import type { MediaItem } from "hybrid-types/DBTypes";
+import { Link } from "react-router";
 //import { useState } from "react";
 
 const MediaRow = (props: { item: MediaItem, setSelectedItem: (item: MediaItem | undefined) => void }) => {
-  const { item, setSelectedItem } = props;
+  const { item } = props;
   //const [dummyLikes, setDummyLikes] = useState( 0);
 
   //const dummyLikesState = useState( 0);
@@ -21,10 +22,15 @@ const MediaRow = (props: { item: MediaItem, setSelectedItem: (item: MediaItem | 
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
       <td>
+
+        {/*
         <button onClick={() =>{
           setSelectedItem(item);
         }}> Select to display the image/video
         </button>
+        */}
+
+        <Link to="/single" state={{item}}>Show</Link>
       </td>
 
       {/* <td>Likes {dummyLikes}

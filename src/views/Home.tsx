@@ -1,8 +1,11 @@
 import type { MediaItem } from 'hybrid-types/DBTypes';
-import MediaRow from './MediaRow';
-import SingleView from './singleView';
+//import MediaRow from './MediaRow';
+//import SingleView from './singleView';
+import MediaRow from '../components/MediaRow';
+import SingleView from '../components/singleView';
 import { useState } from 'react';
 //Component to show home page with list of media items
+
 const Home = () => {
   const mediaArray: MediaItem[] = [
   {
