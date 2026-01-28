@@ -1,13 +1,14 @@
-import type {MediaItem} from 'hybrid-types/DBTypes';
+import type {MediaItemWithOwner} from '../Utilis/types/localTypes';
 
 const SingleView = (props: {
-  item: MediaItem;
-  setSelectedItem: (item: MediaItem | undefined) => void;
+  item: MediaItemWithOwner;
+  setSelectedItem: (item: MediaItemWithOwner | undefined) => void;
 }) => {
   const {item, setSelectedItem} = props;
   return (
     <dialog open>
       <h1>Single View</h1>
+      <h4>{item.username}</h4>
       <h4>{item.title}</h4>
       {item.media_type.split('/')[0] === 'image' ? (
         <img src={item.filename} alt={item.title} />
