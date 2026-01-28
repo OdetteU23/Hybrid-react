@@ -1,7 +1,13 @@
 {
   "files": [],
+  "jest": [
+    "src/tests/**/*.test.ts",
+    "src/tests/**/*.test.tsx",
+    "vitest.setup.js"
+  ],
+  //"mocha": [],
   "references": [
     { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+    { "path": "./tsconfig.node.json" },
   ]
 }

@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" /> // https://vitest.dev/config/
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 
@@ -5,4 +6,9 @@ import react from '@vitejs/plugin-react-swc'
 export default defineConfig({
   plugins: [react()],
   base: '/~odetteu/task-week2_3/',
+  test: {
+    environment: 'jsdom',
+    globals: true,
+    setupFiles: './vitest.setup.js',
+  },
 })

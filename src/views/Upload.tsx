@@ -1,15 +1,23 @@
-//import React from 'react';
-import {type NavigateFunction, useNavigate} from 'react-router';
-
+import {useState} from 'react';
 
 const Upload = () => {
-  const navigate: NavigateFunction = useNavigate();
+  const [uploading, setUploading] = useState(false);
   return (
-    <div>
-      <h1>Welcome to the Upload View!</h1>
-      <button onClick={() => navigate(-1)}>Go back</button>
-    </div>
+    <>
+      <h2>Upload</h2>
+      <button
+        onClick={() => {
+          setUploading(true);
+          setTimeout(() => {
+            setUploading(false);
+          }, 3000);
+        }}
+      >
+        Upload
+      </button>
+      {uploading && <p>Uploading...</p>}
+    </>
   );
-}
+};
 
 export default Upload;
