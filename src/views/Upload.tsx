@@ -1,7 +1,9 @@
 import {useState} from 'react';
+import {type NavigateFunction, useNavigate} from 'react-router';
 
 const Upload = () => {
   const [uploading, setUploading] = useState(false);
+  const navigate: NavigateFunction = useNavigate();
   return (
     <>
       <h2>Upload</h2>
@@ -16,6 +18,7 @@ const Upload = () => {
         Upload
       </button>
       {uploading && <p>Uploading...</p>}
+      <button onClick={() => navigate(-1)}>Go back</button>
     </>
   );
 };

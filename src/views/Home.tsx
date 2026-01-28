@@ -1,65 +1,32 @@
-import type { MediaItem } from 'hybrid-types/DBTypes';
-//import MediaRow from './MediaRow';
-//import SingleView from './singleView';
+import type {MediaItem} from 'hybrid-types/DBTypes';
+import {useEffect, useState} from 'react';
 import MediaRow from '../components/MediaRow';
 import SingleView from '../components/singleView';
-import { useState } from 'react';
-//Component to show home page with list of media items
+import {fetchData} from '../Utilis/fetch-data';
 
 const Home = () => {
-  const mediaArray: MediaItem[] = [
-  {
-    media_id: 8,
-    user_id: 5,
-    filename: 'https://placehold.co/1200x800?text=Pic1&fontsize=60',
-    thumbnail: 'https://placehold.co/320x240?text=Thumb1&fontsize=20',
-    filesize: 170469,
-    media_type: 'image/jpeg',
-    title: '',
-    description: 'This is a placeholder picture.',
-    created_at: '2024-01-07T20:49:34.000Z',
-    screenshots: [],
-  },
-  {
-    media_id: 9,
-    user_id: 7,
-    filename: 'https://placehold.co/800x600?text=Pic2&fontsize=60',
-    thumbnail: 'https://placehold.co/320x240?text=Thumb2&fontsize=20',
-    filesize: 1002912,
-    media_type: 'image/jpeg',
-    title: '',
-    description: '',
-    created_at: '2024-01-07T21:32:27.000Z',
-    screenshots: [],
-  },
-  {
-    media_id: 17,
-    user_id: 2,
-    filename:
-      'http://distribution.bbb3d.renderfarming.net/video/mp4/bbb_sunflower_1080p_60fps_normal.mp4',
-    thumbnail: 'https://placehold.co/320x240?text=Thumb3&fontsize=20',
-    filesize: 1236616,
-    media_type: 'video/mp4',
-    title: 'Bunny',
-    description: 'Butterflies fly around the bunny.',
-    created_at: '2024-01-07T20:48:13.000Z',
-    screenshots: [],
-  },
-];
+  const [mediaArray, setMediaArray] = useState<MediaItem[]>([]);
+  const [selectedItem, setSelectedItem] = useState<MediaItem | undefined>(
+    undefined,
+  );
 
+  useEffect(() => {
+    const getMedia = async () => {
+      const json = await fetchData<MediaItem[]>('test.json');
+      setMediaArray(json);
+      console.log(json);
+    };
+    getMedia();
+  }, []);
 
-
-
-const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
   return (
     <>
-    {selectedItem && <SingleView item={selectedItem} setSelectedItem={(item) => setSelectedItem(item ?? null)} />}
-      <h1>My Media sharing app</h1>
+      {/* Debug
+       <p>Selected item: {selectedItem?.title}</p> */}
+      {selectedItem && (
+        <SingleView item={selectedItem} setSelectedItem={setSelectedItem} />
+      )}
       <h2>My Media</h2>
-    {/* Debug selected item display
-      <p> Selected Item: {selectedItem?.title}</p>
-    */}
-
       <table>
         <thead>
           <tr>
@@ -73,12 +40,16 @@ const [selectedItem, setSelectedItem] = useState<MediaItem | null>(null);
         </thead>
         <tbody>
           {mediaArray.map((item) => (
-            <MediaRow key={item.media_id} item={item} setSelectedItem={(item) => setSelectedItem(item ?? null)} />
+            <MediaRow
+              key={item.media_id}
+              item={item}
+              setSelectedItem={setSelectedItem}
+            />
           ))}
         </tbody>
       </table>
     </>
   );
-}
+};
 
 export default Home;
