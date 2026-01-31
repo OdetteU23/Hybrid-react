@@ -1,7 +1,7 @@
 # React + TypeScript + Vite
 
 ## Live app's link:
-  ==> Open [my live application](https://users.metropolia.fi/~odetteu/task-week2_3/) to view it in the browser.
+  ==> Open [my live application](https://users.metropolia.fi/~odetteu/hooks/) to view it in the browser.
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

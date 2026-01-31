@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react-swc'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/~odetteu/task-week2_3/',
+  base: '/~odetteu/hooks/',
   test: {
     environment: 'jsdom',
     globals: true,
