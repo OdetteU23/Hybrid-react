@@ -1,4 +1,4 @@
-import type {MediaItem, UserWithNoPassword} from 'hybrid-types/DBTypes';
+import type {MediaItem, UserWithNoPassword, User} from 'hybrid-types/DBTypes';
 
 type MediaItemWithOwner =
   MediaItem & {username: string};
@@ -8,9 +8,12 @@ type AuthContextType = {
     handleLogout: () => void;
     handleAutoLogin: () => void;
 };
-type Credentials = {
+
+/*type Credentials =  {
     username: string;
     password: string;
 };
+*/
+type Credentials = Pick<User, 'username' | 'password'>;
 
 export type {MediaItemWithOwner, AuthContextType, Credentials};

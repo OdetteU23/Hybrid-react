@@ -1,21 +1,16 @@
-// LoginForm.tsx
-import { useState } from 'react';
-import { UseUserContext } from '../hooks/ContextHooks';
 import type { Credentials } from '../Utilis/types/localTypes';
+import useForm from '../hooks/formhooks';
+import { UseUserContext } from '../hooks/ContextHooks';
 
 const LoginForm = () => {
   const { handleLogin } = UseUserContext();
-  const [inputs, setInputs] = useState<Credentials>({
+
+  const initValues: Credentials = {
     username: '',
     password: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputs({...inputs, [e.target.name]: e.target.value});
   };
 
-  const doSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const doLogin = async () => {
     try {
       await handleLogin(inputs);
     } catch (e) {
@@ -23,24 +18,37 @@ const LoginForm = () => {
     }
   };
 
+  const { inputs, handleInputChange, handleSubmit } = useForm(doLogin, initValues);
+
   return (
-    <form onSubmit={doSubmit}>
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        value={inputs.username}
-        onChange={handleChange}
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={inputs.password}
-        onChange={handleChange}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="loginusername">Username</label>
+          <input
+            name="username"
+            type="text"
+            id="loginusername"
+            onChange={handleInputChange}
+            autoComplete="username"
+            value={inputs.username}
+          />
+        </div>
+        <div>
+          <label htmlFor="loginpassword">Password</label>
+          <input
+            name="password"
+            type="password"
+            id="loginpassword"
+            onChange={handleInputChange}
+            autoComplete="current-password"
+            value={inputs.password}
+          />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+    </>
   );
 };
 
