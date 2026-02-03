@@ -1,18 +1,20 @@
-import type { MediaItem, MediaItemWithOwner } from "hybrid-types/DBTypes";
-import { Link } from "react-router";
-//import { useState } from "react";
+import type {MediaItemWithOwner} from 'hybrid-types/DBTypes';
+// import {Link} from 'react-router';
+//import {useState} from 'react';
 
-const MediaRow = (props: { item: MediaItemWithOwner, setSelectedItem: (item: MediaItem | undefined) => void }) => {
-  const { item } = props;
-  //const [dummyLikes, setDummyLikes] = useState( 0);
-
-  //const dummyLikesState = useState( 0);
+const MediaRow = (props: {
+  item: MediaItemWithOwner;
+  setSelectedItem: (item: MediaItemWithOwner | undefined) => void;
+}) => {
+  const {item, setSelectedItem} = props;
+  //const [dummyLikes, setDummyLikes] = useState(0);
+  // Sama:
+  //const dummyLikesState = useState(0);
   //const dummyLikes = dummyLikesState[0];
   //const setDummyLikes = dummyLikesState[1];
 
-
   return (
-    <tr key={item.media_id}>
+    <tr>
       <td>
         <img src={item.thumbnail} alt={item.title} />
       </td>
@@ -23,27 +25,25 @@ const MediaRow = (props: { item: MediaItemWithOwner, setSelectedItem: (item: Med
       <td>{item.filesize}</td>
       <td>{item.media_type}</td>
       <td>
-
-        {/*
-        <button onClick={() =>{
-          setSelectedItem(item);
-        }}> Select to display the image/video
+        {/* <Link to="/single" state={{item}}>
+          Show
+        </Link> */}
+        <button
+          onClick={() => {
+            setSelectedItem(item);
+          }}
+        >
+          View
         </button>
-        */}
-
-        <Link to="/single" state={{item}}>Show</Link>
       </td>
-
-      {/* <td>Likes {dummyLikes}
-        <button onClick={() =>{
-          console.log('Add like to ', item.title);
-          setDummyLikes (dummyLikes + 1);
-        }}> Add like </button>
+      {/*   <td>Likes: {dummyLikes}
+        <button onClick={() => {
+          console.log('add like to', item.title);
+          setDummyLikes(dummyLikes + 1);
+        }} >Add like</button>
       </td> */}
-
     </tr>
-
   );
-}
+};
 
 export default MediaRow;

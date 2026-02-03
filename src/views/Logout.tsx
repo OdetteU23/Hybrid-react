@@ -1,5 +1,19 @@
+import { useEffect } from 'react';
+import {  useNavigate } from 'react-router';
+
 const Logout = () => {
-  return <div>Logout (TODO: implement logout, clear localstorage, redirect to login page)</div>;
+  const navigate = useNavigate();
+  localStorage.removeItem('token');
+
+  useEffect(() => {
+    navigate('/');
+  }, [navigate]);
+ //navigate('/');
+
+  return (
+   <p>Logged out</p>
+   // <Navigate to={'/'} />
+  );
 };
 
 export default Logout;

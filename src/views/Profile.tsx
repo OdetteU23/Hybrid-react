@@ -16,14 +16,15 @@ const Profile = () => {
       }
     };
     getUserInfo();
-  }, []);
+  }, [getUserByToken]);
 
   return (
     <>
       {user && (
         <>
           <h2>{user.username}</h2>
-          <p>TODO: print user info here</p>
+          <p> {user.username} {user.email}</p>
+          {/*<p>user level: {user.user_level}</p>*/}
         </>
       )}
     </>

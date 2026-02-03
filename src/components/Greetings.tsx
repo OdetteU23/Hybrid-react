@@ -1,33 +1,38 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 const UserGreeting = () => {
-  return (
-    <h2>Terve kirjauttunut käyttäjä!</h2>
-  )
+  return <p>Terve kirjautunut käyttäjä!</p>;
 };
 
 const GuestGreeting = () => {
-  return (
-    <h2>Terve vieras!</h2>
-  )
+  return <p>Terve vieras!</p>;
 };
 
 const Greeting = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <>
-    {isLoggedIn ? <UserGreeting /> : <GuestGreeting />}
-
-{/* Toinen tapa, vaihtuva nappula */}
-
-    <button onClick={() => {
-      // Toggle the login state
-      setIsLoggedIn(!isLoggedIn)
-      }}>
-
-      {isLoggedIn ? 'Log out' : 'Log in'}
-    </button>
+      {isLoggedIn ? <UserGreeting /> : <GuestGreeting />}
+      {!isLoggedIn && (
+        <button
+          onClick={() => {
+            setIsLoggedIn(true);
+          }}
+        >
+          Login
+        </button>
+      )}
+      {/* toinen tapa, toggle-nappula (huom. jsx:n sisällä oleva kommentti)*/}
+      <button
+        onClick={() => {
+          // kommentit toimii normaalisti koodin sisällä
+          setIsLoggedIn(!isLoggedIn);
+        }}
+      >
+        {isLoggedIn ? 'Log out' : 'Login'}
+      </button>
     </>
   );
 };
+
 export default Greeting;
