@@ -1,8 +1,5 @@
 const Logout = () => {
-  return (
-    <div>
-      <h2>You have been logged out.</h2>
-    </div>
-  );
-}
+  return <div>Logout (TODO: implement logout, clear localstorage, redirect to login page)</div>;
+};
+
 export default Logout;

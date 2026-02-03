@@ -1,13 +1,16 @@
-//import type {MediaItem, UserWithNoPassword} from 'hybrid-types/DBTypes';
+import type {MediaItem} from 'hybrid-types/DBTypes';
 import {useState} from 'react';
 import MediaRow from '../components/MediaRow';
 import SingleView from '../components/singleView';
 import {useMedia} from '../hooks/apiHooks';
-import type { MediaItem, MediaItemWithOwner } from 'hybrid-types/DBTypes';
 
 const Home = () => {
-  const mediaArray = useMedia();
-  const [selectedItem, setSelectedItem] = useState<MediaItemWithOwner | undefined>(undefined);
+  const [selectedItem, setSelectedItem] = useState<MediaItem | undefined>(
+    undefined,
+  );
+
+  const {mediaArray} = useMedia();
+
   return (
     <>
       {/* Debug
@@ -30,12 +33,11 @@ const Home = () => {
         </thead>
         <tbody>
           {mediaArray.map((item) => (
-          <MediaRow
-            key={item.media_id}
-            item={item}
-            setSelectedItem={setSelectedItem as
-              (item: MediaItem | undefined) => void}
-          />
+            <MediaRow
+              key={item.media_id}
+              item={item}
+              setSelectedItem={setSelectedItem}
+            />
           ))}
         </tbody>
       </table>

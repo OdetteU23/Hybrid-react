@@ -1,28 +1,35 @@
-import type { Credentials } from '../Utilis/types/localTypes';
-import useForm from '../hooks/formhooks';
-import { UseUserContext } from '../hooks/ContextHooks';
+import {useNavigate} from 'react-router';
+import {useAuthentication} from '../hooks/apiHooks';
+//import useForm from '../hooks/formHooks';
+import useForm from '../hooks/formHooks';
+import type {Credentials} from '../Utilis/types/localTypes';
+import type {LoginResponse} from 'hybrid-types/MessageTypes';
 
 const LoginForm = () => {
-  const { handleLogin } = UseUserContext();
-
+  const navigate = useNavigate();
+  const {postLogin} = useAuthentication();
   const initValues: Credentials = {
     username: '',
     password: '',
   };
-
   const doLogin = async () => {
-    try {
-      await handleLogin(inputs);
-    } catch (e) {
-      console.log((e as Error).message);
-    }
+    //console.log(inputs);
+    // login functionalities here
+    // eslint-disable-next-line react-hooks/immutability
+    const result: LoginResponse = await postLogin(inputs as Credentials);
+    console.log('doLogin result', result)
+    localStorage.setItem('token', result.token);
+    navigate('/');
   };
 
-  const { inputs, handleInputChange, handleSubmit } = useForm(doLogin, initValues);
+  const {inputs, handleInputChange, handleSubmit} = useForm(
+    doLogin,
+    initValues,
+  );
 
   return (
     <>
-      <h1>Login</h1>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="loginusername">Username</label>
@@ -32,7 +39,6 @@ const LoginForm = () => {
             id="loginusername"
             onChange={handleInputChange}
             autoComplete="username"
-            value={inputs.username}
           />
         </div>
         <div>
@@ -43,7 +49,6 @@ const LoginForm = () => {
             id="loginpassword"
             onChange={handleInputChange}
             autoComplete="current-password"
-            value={inputs.password}
           />
         </div>
         <button type="submit">Login</button>

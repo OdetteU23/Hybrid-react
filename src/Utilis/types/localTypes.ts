@@ -2,6 +2,7 @@ import type {MediaItem, UserWithNoPassword, User} from 'hybrid-types/DBTypes';
 
 type MediaItemWithOwner =
   MediaItem & {username: string};
+
 type AuthContextType = {
     user: UserWithNoPassword | null;
     handleLogin: (credentials: Credentials) => void;
@@ -15,5 +16,5 @@ type AuthContextType = {
 };
 */
 type Credentials = Pick<User, 'username' | 'password'>;
-
-export type {MediaItemWithOwner, AuthContextType, Credentials};
+type RegisterCredentials = Pick<User, 'username' | 'password' | 'email'>;
+export type {MediaItemWithOwner, AuthContextType, Credentials, RegisterCredentials};
