@@ -3,7 +3,7 @@ import useForm from '../hooks/formHooks';
 import type {RegisterCredentials} from '../Utilis/types/localTypes';
 
 const RegisterForm = () => {
-  const {postRegister} =  useUser();
+  const {postRegister} = useUser();
 
   const initValues: RegisterCredentials = {
     username: '',
