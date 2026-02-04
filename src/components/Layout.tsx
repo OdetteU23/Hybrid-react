@@ -6,7 +6,7 @@ const Layout = () => {
   const {handleAutoLogin, user} = useUserContext();
   useEffect(() => {
     handleAutoLogin();
-  }, [handleAutoLogin]);
+  }, []);
   return (
     <div>
       <nav>
@@ -14,20 +14,22 @@ const Layout = () => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          {user? (
-            <><><li>
-              <Link to="/profile">Profile</Link>
-            </li><li>
+          {user ? (
+            <>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
                 <Link to="/upload">Upload</Link>
-              </li><li>
+              </li>
+              <li>
                 <Link to="/logout">Logout</Link>
-              </li></><li>
-                <Link to="/single">Single</Link>
-              </li></>
+              </li>
+            </>
           ) : (
             <li>
-            <Link to="/login">Login</Link>
-          </li>
+              <Link to="/login">Login</Link>
+            </li>
           )}
         </ul>
       </nav>

@@ -16,15 +16,16 @@ const Profile = () => {
       }
     };
     getUserInfo();
-  }, [getUserByToken]);
+  }, []); //[getUserByToken]);
 
   return (
     <>
       {user && (
         <>
           <h2>{user.username}</h2>
-          <p> {user.username} {user.email}</p>
-          {/*<p>user level: {user.user_level}</p>*/}
+          <p>Email: {user.email}</p>
+          <p>User level: {user.level_name}</p>
+          <p>Registered successfull at: {new Date(user.created_at).toLocaleString('fi-FI')}</p>
         </>
       )}
     </>

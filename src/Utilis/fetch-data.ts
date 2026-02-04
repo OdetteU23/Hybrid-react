@@ -11,7 +11,7 @@ const fetchData = async <T>(
     const errorJson = json as unknown as ErrorResponse;
     console.log('errorJson', errorJson);
     if (errorJson.message) {
-      throw new Error(errorJson.message);
+      throw new Error(errorJson.message + " status: The email and username are already in use or the email is incorrect " + response.status);
     }
     throw new Error(`Error ${response.status} occured`);
   }
