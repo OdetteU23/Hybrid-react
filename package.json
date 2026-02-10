@@ -13,6 +13,7 @@
     "test:component": "vitest run tsx"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
     "localforage": "^1.10.0",
     "match-sorter": "^8.2.0",
     "react": "^19.2.0",
@@ -37,7 +38,8 @@
     "globals": "^16.5.0",
     "hybrid-types": "github:ilkkamtk/hybrid-types",
     "jsdom": "^27.4.0",
-    "prettier": "3.8.0",
+    "prettier": "^3.8.0",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.4",
