@@ -7,7 +7,7 @@ import path from 'path/win32';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/~odetteu/week3',
+  base: '/~odetteu/week5',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
