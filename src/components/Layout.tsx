@@ -3,36 +3,78 @@ import {useUserContext} from '../hooks/ContextHooks';
 import {useEffect} from 'react';
 
 const Layout = () => {
-  const {handleAutoLogin, user} = useUserContext();
+  const {handleAutoLogin, user, loading} = useUserContext();
+  //const {handleLogout} = useUserContext();
   useEffect(() => {
     handleAutoLogin();
-  }, []);
+    //handleLogout();
+  }, [handleAutoLogin])//handleLogout;
+
+  if (loading) {
+    return <div className="text-2xl">Loading...</div>;
+  }
+
   return (
     <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          {user ? (
-            <>
+      <header className="bg-stone-600">
+        <div className="mx-auto mb-4 flex w-full max-w-6xl items-center justify-between px-4 py-2 sm:px-6">
+          <Link
+            className="block rounded px-2 py-2 text-center text-2xl font-bold transition-all duration-500 ease-in-out hover:bg-stone-700"
+            to="/"
+          >
+            Hybrid App
+          </Link>
+          <nav>
+            <ul className="m-0 flex items-center justify-end gap-1 p-0">
               <li>
-                <Link to="/profile">Profile</Link>
+                <Link
+                  className="block rounded px-3 py-2 text-center font-bold transition-all duration-500 ease-in-out hover:bg-stone-700"
+                  to="/"
+                >
+                  Home
+                </Link>
               </li>
-              <li>
-                <Link to="/upload">Upload</Link>
-              </li>
-              <li>
-                <Link to="/logout">Logout</Link>
-              </li>
-            </>
-          ) : (
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-          )}
-        </ul>
-      </nav>
+              {user ? (
+                <>
+                  <li>
+                    <Link
+                      className="block rounded px-3 py-2 text-center font-bold transition-all duration-500 ease-in-out hover:bg-stone-700"
+                      to="/profile"
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="block rounded px-3 py-2 text-center font-bold transition-all duration-500 ease-in-out hover:bg-stone-700"
+                      to="/upload"
+                    >
+                      Upload
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="block rounded px-3 py-2 text-center font-bold transition-all duration-500 ease-in-out hover:bg-stone-700"
+                      to="/logout"
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <Link
+                    className="block rounded px-3 py-2 text-center font-bold transition-all duration-500 ease-in-out hover:bg-stone-700"
+                    to="/login"
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </nav>
+        </div>
+      </header>
       <main>
         <Outlet />
       </main>

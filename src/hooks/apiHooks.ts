@@ -1,4 +1,4 @@
-import type {MediaItem, MediaItemWithOwner, UserWithNoPassword, Like} from 'hybrid-types/DBTypes';
+import type {MediaItem, MediaItemWithOwner, UserWithNoPassword, Like, Comment} from 'hybrid-types/DBTypes';
 import {useCallback, useEffect, useState} from 'react';
 import {fetchData} from '../Utilis/fetch-data';
 import type {Credentials, RegisterCredentials} from '../Utilis/types/localTypes';
@@ -205,7 +205,46 @@ const useLike = () => {
     );
   };
 
-  return {postLike, deleteLike, getCountByMediaId, getUserLike};
+  const useComment = () => {
+   const postComment = async (
+      comment_text: string,
+      media_id: number,
+      token: string) => {
+        const fetchOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+          body: JSON.stringify({comment_text, media_id}),
+        };
+        return fetchData<MessageResponse>(
+          import.meta.env.VITE_MEDIA_API + '/comments',
+          fetchOptions,
+        );
+   };
+
+   const getCommentsByMediaId = async (media_id: number) => {
+       // TODO: Send a GET request to /comments/bymedia/:media_id to get the comments.
+       const comments = await fetchData<Comment[]>(
+        import.meta.env.VITE_MEDIA_API + '/comments/byMedia/' + media_id,);
+
+       // TODO: Send a GET request to auth api and add username to all comments
+       const commentsWithUsername = Promise.all<Comment & {username: string}>(
+        comments.map(async(comment)=> {
+         const userInfo =  await fetchData<UserWithNoPassword>(
+          import.meta.env.VITE_AUTH_API + '/users/' + comment.user_id
+        );
+        return {...comment, username:userInfo.username};
+       })
+      );
+       return commentsWithUsername;
+   };
+
+   return { postComment, getCommentsByMediaId };
+ };
+
+  return {postLike, deleteLike, getCountByMediaId, getUserLike, useComment};
 };
 
 export {useMedia, useAuthentication, useUser, useFile, useLike};

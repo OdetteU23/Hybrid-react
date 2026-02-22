@@ -1,10 +1,12 @@
 import type {MediaItem, UserWithNoPassword, User, Like} from 'hybrid-types/DBTypes';
+import type { Comment } from "hybrid-types/DBTypes";
 
 type MediaItemWithOwner =
   MediaItem & {username: string};
 
 type AuthContextType = {
     user: UserWithNoPassword | null;
+    loading: boolean;
     handleLogin: (credentials: Credentials) => void;
     handleLogout: () => void;
     handleAutoLogin: () => void;
@@ -17,10 +19,6 @@ type AuthContextType = {
 */
 type Credentials = Pick<User, 'username' | 'password'>;
 type RegisterCredentials = Pick<User, 'username' | 'password' | 'email'>;
-type buttonType = React.ButtonHTMLAttributes<HTMLButtonElement> &{
-  value: string;
-  variant?: 'basic' | 'danger' | 'warning';
-}
 type LikesType = {
   item: MediaItemWithOwner | undefined;
 };
@@ -35,4 +33,9 @@ type LikeAction = {
   count?: number;
 };
 
-export type {MediaItemWithOwner, LikeState, LikeAction, AuthContextType, Credentials, RegisterCredentials, buttonType, LikesType};
+type CommentStore = {
+   comments: Partial<Comment & {username: string}>[];
+   addComment: (comment: Partial<Comment & {username: string}>) => void;
+};
+
+export type {MediaItemWithOwner, LikeState, LikeAction, AuthContextType, Credentials, CommentStore, RegisterCredentials, LikesType};

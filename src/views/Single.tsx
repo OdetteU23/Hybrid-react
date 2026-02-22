@@ -1,32 +1,32 @@
-import {type NavigateFunction, useNavigate} from 'react-router';
+import { useNavigate} from 'react-router';
 import type {MediaItem} from 'hybrid-types/DBTypes';
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router';
 
-const Single = () =>  {
-  const navigate: NavigateFunction = useNavigate();
+const Single = () => {
+  const navigate = useNavigate();
   const {state} = useLocation();
-  const item: MediaItem = state.item;
+
+  const item = state.item as MediaItem;
+
   return (
     <dialog open>
-      <h1>Single View</h1>
-      <h4>{item.title}</h4>
-      {item.media_type.split('/')[0] === 'image' ? (
-        <img src={item.filename} alt={item.title} />
-      ) : (
-        <video src={item.filename} controls />
+      {item && (
+        <>
+          <button onClick={() => navigate(-1)}>Go back</button>
+          <h2>{item.title}</h2>
+          {item.media_type.split('/')[0] === 'image' && (
+            <img src={item.filename} alt={item.description || item.title} />
+          )}
+          {item.media_type.split('/')[0] === 'video' && (
+            <video src={item.filename} controls />
+          )}
+          <p>{item.description}</p>
+          <p>
+            Uploaded at {new Date(item.created_at).toLocaleString('en-fi')} by
+            user id {item.user_id}
+          </p>
+        </>
       )}
-
-      {/*<p>{item.description}</p>*/}
-      <h4>Uploaded {new Date(item.created_at).toLocaleDateString('fi-FI')}</h4>
-
-      {
-      /*<button onClick={() => {}}>
-        <h2> Close </h2>
-      </button>
-      */
-      }
-
-      <button onClick={() => navigate(-1)}>Go back</button>
     </dialog>
   );
 };

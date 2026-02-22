@@ -1,10 +1,17 @@
 {
   "files": [],
+  "ignoreDeprecations": "6.0",
   "jest": [
     "src/tests/**/*.test.ts",
     "src/tests/**/*.test.tsx",
     "vitest.setup.js"
   ],
+   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
   //"mocha": [],
   "references": [
     { "path": "./tsconfig.app.json" },

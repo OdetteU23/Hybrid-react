@@ -1,7 +1,8 @@
-import Button from './Button';
+import {Button} from './ui/button';
 import type {LikesType, LikeState, LikeAction} from '../Utilis/types/localTypes';
 import {useLike} from '../hooks/apiHooks';
 import { useEffect, useReducer} from 'react';
+import {ThumbsUp, ThumbsDown} from 'lucide-react';
 
 const likeInitialState: LikeState = {
   count: 0,
@@ -45,6 +46,7 @@ const Likes = ({item}: LikesType) => {
   useEffect(() => {
     getLikes();
     getLikeCount();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function likeReducer(state: LikeState, action: LikeAction): LikeState {
@@ -70,8 +72,14 @@ const Likes = ({item}: LikesType) => {
       // If user has liked the media, delete the like. Otherwise, post the like.
       if (likeState.userLike) {
         // TODO: delete the like and dispatch the new like count to the state. Dispatching is already done in the getLikes and getLikeCount functions.
+        await deleteLike(likeState.userLike.like_id, token);
+        getLikes();
+        getLikeCount();
       } else {
         // TODO: post the like and dispatch the new like count to the state. Dispatching is already done in the getLikes and getLikeCount functions.
+        await postLike(item.media_id, token);
+        getLikes();
+        getLikeCount();
       }
     } catch (e) {
       console.log('like error', (e as Error).message);
@@ -80,11 +88,12 @@ const Likes = ({item}: LikesType) => {
 
   return (
     <>
-      <Button value={likeState.userLike ? '👎' : '👍'} onClick={handleLike} />
+      <Button variant="ghost" onClick={handleLike}>
+        {likeState.userLike ? <ThumbsDown fill="white" stroke='black'/> : <ThumbsUp fill="white" stroke='black' />}
+      </Button>
       <p>Likes: {likeState.count}</p>
     </>
   );
 };
-
 
 export default Likes;

@@ -123,7 +123,8 @@ const RegisterForm = () => {
         <button
           className="mt-2 w-full rounded-md bg-stone-500 px-4 py-2 font-semibold transition hover:bg-stone-700"
           type="submit"
-          // TODO: disable when form is not valid
+          // disable when form is not valid
+          disabled={!usernameAvailable || !emailAvailable || inputs.password.length < 6}
         >
           Register
         </button>

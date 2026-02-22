@@ -1,8 +1,15 @@
-import type {buttonType} from '../Utilis/types/localTypes';
+type ButtonType = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  value: string;
+  variant?: 'basic' | 'danger' | 'warning';
+};
 
-
-const Button = ({value, variant = 'basic', className = '', ...props}: buttonType) => {
-const baseClasses =
+const Button_old = ({
+  value,
+  variant = 'basic',
+  className = '',
+  ...props
+}: ButtonType) => {
+  const baseClasses =
     'block w-full p-2 text-center transition-all duration-500 ease-in-out';
   let bgClasses = '';
   switch (variant) {
@@ -22,4 +29,5 @@ const baseClasses =
     </button>
   );
 };
-export default Button;
+
+export default Button_old;

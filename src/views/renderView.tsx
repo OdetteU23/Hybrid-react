@@ -1,3 +1,4 @@
+/*
 import {useState} from 'react';
 
 function RenderView() {
@@ -18,3 +19,4 @@ function RenderView() {
 }
 
 export default RenderView;
+*/
