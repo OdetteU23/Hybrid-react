@@ -10,6 +10,8 @@ const UserContext = createContext<AuthContextType | null>(null);
 
 const UserProvider = ({children}: {children: React.ReactNode}) => {
   const [user, setUser] = useState<UserWithNoPassword | null>(null);
+  // setLoading
+  const [loading] = useState(false);
   const {postLogin} = useAuthentication();
   const {getUserByToken} = useUser();
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const UserProvider = ({children}: {children: React.ReactNode}) => {
 
   return (
     <UserContext.Provider
-      value={{user, handleLogin, handleLogout, handleAutoLogin}}
+      value={{user, loading, handleLogin, handleLogout, handleAutoLogin}}
     >
       {children}
     </UserContext.Provider>
